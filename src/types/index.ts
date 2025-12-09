@@ -72,7 +72,7 @@ export interface DetectionResult {
 }
 
 export interface AppState {
-  isActive: boolean; // true between 08:00-11:00
+  isActive: boolean; // true between 15:00-17:30
   todayStats: DailyStats;
   weeklyStats: WeeklyStats;
   achievements: Achievement[];

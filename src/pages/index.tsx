@@ -6,8 +6,7 @@ import { CountdownTimer } from '../components/Dashboard/CountdownTimer';
 import { TeamScore } from '../components/Dashboard/TeamScore';
 import { MoodBreakdown } from '../components/Dashboard/MoodBreakdown';
 import { CameraView } from '../components/Camera/CameraView';
-import { AchievementToast, AchievementCard } from '../components/Achievements';
-import { WeeklyStandings } from '../components/Leaderboard/WeeklyStandings';
+import { AchievementToast } from '../components/Achievements';
 import { DailyWinner } from '../components/Leaderboard/DailyWinner';
 import { Confetti, useConfetti } from '../components/Effects/Confetti';
 import { BackgroundMusic } from '../components/Effects/BackgroundMusic';
@@ -76,7 +75,7 @@ const IndexPage: React.FC<PageProps> = () => {
             </span>
           </h1>
           <p className="text-base text-white/60">
-            ☀️ Morning Mood Battle • 08:00 - 11:00
+            🌤️ Afternoon Mood Battle • 15:00 - 17:30
           </p>
         </div>
 
@@ -125,48 +124,18 @@ const IndexPage: React.FC<PageProps> = () => {
         </div>
 
         {/* Other components in two columns */}
+        {/* Recent Activity and Settings - Grid to match above */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="space-y-6">
-            {/* Weekly Stats */}
-            <GlassCard className="p-4">
-              <div className="text-center space-y-3">
-                <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Weekly Score</p>
-                  <p className="text-xl font-bold">
-                    <span className="text-red-400">🎅 {weeklyStats.leftWins}</span>
-                    <span className="text-white/30 mx-2">vs</span>
-                    <span className="text-green-400">{weeklyStats.rightWins} 🦌</span>
-                  </p>
-                </div>
-
-                {(weeklyStats.leftStreak > 0 || weeklyStats.rightStreak > 0) && (
-                  <div className="pt-3 border-t border-white/10">
-                    <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Win Streak</p>
-                    <p className="text-base font-bold">
-                      {weeklyStats.leftStreak > 0 && (
-                        <span className="text-red-400">🔥 Left: {weeklyStats.leftStreak} days</span>
-                      )}
-                      {weeklyStats.rightStreak > 0 && (
-                        <span className="text-green-400">🔥 Right: {weeklyStats.rightStreak} days</span>
-                      )}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </GlassCard>
-
-            {/* Mood Breakdown */}
+          {/* Mood Breakdown (Recent Activity) */}
+          <div>
             <MoodBreakdown
               recentCheckins={recentCheckins}
               lastCheckIn={lastCheckIn}
             />
           </div>
 
-          <div className="space-y-6">
-            {/* Weekly Standings */}
-            <WeeklyStandings stats={weeklyStats} />
-
-            {/* Settings Card */}
+          {/* Settings Card */}
+          <div>
             <GlassCard className="p-3 space-y-2">
               <button
                 onClick={() => {
@@ -186,11 +155,6 @@ const IndexPage: React.FC<PageProps> = () => {
               </button>
             </GlassCard>
           </div>
-        </div>
-
-        {/* Achievements - Full width */}
-        <div className="mb-6">
-          <AchievementCard achievements={achievements} />
         </div>
 
         {/* Footer */}

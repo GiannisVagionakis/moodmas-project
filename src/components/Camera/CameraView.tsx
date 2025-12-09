@@ -222,7 +222,7 @@ export const CameraView: React.FC<CameraViewProps> = memo(({
             <div className="text-center">
               <span className="text-4xl mb-2 block">🌙</span>
               <p className="text-white/80 font-semibold">Voting Closed</p>
-              <p className="text-white/50 text-sm">Come back between 08:00 - 11:00</p>
+              <p className="text-white/50 text-sm">Come back between 15:00 - 17:30</p>
             </div>
           </div>
         )}

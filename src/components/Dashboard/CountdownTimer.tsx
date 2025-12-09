@@ -20,7 +20,7 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({ onEnd }) => {
 
   const getStatusText = () => {
     if (isEnded) return 'Voting Closed';
-    if (!isActive && new Date().getHours() < 8) return 'Starts at 08:00';
+    if (!isActive && new Date().getHours() < 15) return 'Starts at 15:00';
     if (!isActive) return 'Ended for Today';
     return 'Time Remaining';
   };
@@ -102,7 +102,7 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({ onEnd }) => {
       {/* Voting window info */}
       <div className="mt-4 pt-4 border-t border-white/10">
         <p className="text-xs text-white/40">
-          ☀️ Morning Mood Battle • 08:00 - 11:00
+          🌤️ Afternoon Mood Battle • 15:00 - 17:30
         </p>
       </div>
     </GlassCard>

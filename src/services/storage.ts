@@ -23,51 +23,28 @@ export const getTodayDateString = (): string => {
   return new Date().toISOString().split('T')[0];
 };
 
-// Helper to check if we're in active hours (08:00 - 11:00)
-// DEMO MODE: Always return true for hackathon demonstration
+// Helper to check if we're in active hours (15:00 - 16:00)
 export const isActiveHours = (): boolean => {
-  return true; // Demo mode - always active
-
-  // Original time check (uncomment for production):
-  // const now = new Date();
-  // const hours = now.getHours();
-  // const minutes = now.getMinutes();
-  // const timeInMinutes = hours * 60 + minutes;
-  // // 08:00 = 480 minutes, 11:00 = 660 minutes
-  // return timeInMinutes >= 480 && timeInMinutes < 660;
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const timeInMinutes = hours * 60 + minutes;
+  // 15:00 = 900 minutes, 17:30 = 1050 minutes
+  return timeInMinutes >= 900 && timeInMinutes < 1050;
 };
 
-// Calculate time remaining until 11:00
-// DEMO MODE: Show countdown from current time + 3 hours for demonstration
+// Calculate time remaining until 17:30
 export const getTimeRemaining = (): { hours: number; minutes: number; seconds: number } => {
   const now = new Date();
 
-  // Demo mode: Always show ~3 hours remaining from page load
-  // This creates a persistent countdown experience
-  const sessionStart = typeof window !== 'undefined'
-    ? window.sessionStorage.getItem('moodmas_session_start')
-    : null;
+  // Calculate end time for today at 17:30
+  const endTime = new Date();
+  endTime.setHours(17, 30, 0, 0);
 
-  let startTime: number;
-  if (sessionStart) {
-    startTime = parseInt(sessionStart, 10);
-  } else {
-    startTime = now.getTime();
-    if (typeof window !== 'undefined') {
-      window.sessionStorage.setItem('moodmas_session_start', startTime.toString());
-    }
-  }
-
-  // End time is 3 hours after session start
-  const endTime = startTime + (3 * 60 * 60 * 1000);
-  const diff = endTime - now.getTime();
+  const diff = endTime.getTime() - now.getTime();
 
   if (diff <= 0) {
-    // Reset for new session
-    if (typeof window !== 'undefined') {
-      window.sessionStorage.removeItem('moodmas_session_start');
-    }
-    return { hours: 2, minutes: 59, seconds: 59 };
+    return { hours: 0, minutes: 0, seconds: 0 };
   }
 
   const hours = Math.floor(diff / (1000 * 60 * 60));
@@ -222,7 +199,7 @@ const updateMoodBreakdown = (breakdown: MoodBreakdown, emotion: EmotionType): vo
   }
 };
 
-// Finalize today's stats (called at 11:00)
+// Finalize today's stats (called at 17:30)
 export const finalizeDailyStats = (): DailyStats => {
   const today = getTodayDateString();
   const stats = getDailyStats(today);
