@@ -1,0 +1,32 @@
+{
+  "name": "moodmas-frontend",
+  "version": "1.0.0",
+  "description": "MoodMas - AI-powered morning mood battle",
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "start": "gatsby develop -H 0.0.0.0"
+  },
+  "dependencies": {
+    "@types/howler": "^2.2.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/uuid": "^10.0.0",
+    "face-api.js": "^0.22.2",
+    "framer-motion": "^11.15.0",
+    "gatsby": "^5.15.0",
+    "gatsby-plugin-postcss": "^6.15.0",
+    "gatsby-plugin-typescript": "^5.15.0",
+    "howler": "^2.2.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2",
+    "uuid": "^11.0.3"
+  },
+  "keywords": ["moodmas", "hackathon", "mood-detection"],
+  "author": "",
+  "license": "ISC"
+}
