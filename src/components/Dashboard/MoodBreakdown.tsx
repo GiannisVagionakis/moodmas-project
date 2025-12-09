@@ -64,12 +64,15 @@ export const MoodBreakdown: React.FC<MoodBreakdownProps> = ({
             </div>
             <div className="text-right">
               <motion.div
-                className="text-2xl font-bold text-green-400"
+                className={`text-2xl font-bold ${lastCheckIn.happinessScore > 0 ? 'text-green-400' :
+                  lastCheckIn.happinessScore < 0 ? 'text-red-400' :
+                    'text-yellow-400'
+                  }`}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: 'spring' }}
               >
-                +{lastCheckIn.happinessScore}
+                {lastCheckIn.happinessScore > 0 ? '+' : ''}{lastCheckIn.happinessScore} pts
               </motion.div>
             </div>
           </div>
@@ -95,9 +98,8 @@ export const MoodBreakdown: React.FC<MoodBreakdownProps> = ({
                 <span className="text-xl">{emotionEmoji[checkin.dominantEmotion]}</span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className={`w-2 h-2 rounded-full ${
-                      checkin.team === 'LEFT' ? 'bg-red-500' : 'bg-green-500'
-                    }`} />
+                    <span className={`w-2 h-2 rounded-full ${checkin.team === 'LEFT' ? 'bg-red-500' : 'bg-green-500'
+                      }`} />
                     <span className="text-sm font-medium">Team {checkin.team}</span>
                   </div>
                   <span className="text-xs text-white/40">
@@ -105,19 +107,11 @@ export const MoodBreakdown: React.FC<MoodBreakdownProps> = ({
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <div className={`w-16 h-2 rounded-full bg-white/10 overflow-hidden`}>
-                  <motion.div
-                    className={emotionColors[checkin.dominantEmotion]}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${checkin.happinessScore}%` }}
-                    transition={{ duration: 0.3 }}
-                    style={{ height: '100%' }}
-                  />
-                </div>
-                <span className="text-sm font-bold text-white/70 w-8 text-right">
-                  {checkin.happinessScore}
-                </span>
+              <div className={`text-base font-bold ${checkin.happinessScore > 0 ? 'text-green-400' :
+                  checkin.happinessScore < 0 ? 'text-red-400' :
+                    'text-yellow-400'
+                }`}>
+                {checkin.happinessScore > 0 ? '+' : ''}{checkin.happinessScore} pts
               </div>
             </motion.div>
           ))

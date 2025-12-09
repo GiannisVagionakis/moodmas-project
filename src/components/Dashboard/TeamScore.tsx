@@ -148,6 +148,21 @@ export const TeamScore: React.FC<TeamScoreProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Total Score Display */}
+      <div className="mt-4 pt-4 border-t border-white/20">
+        <div className="text-center">
+          <p className="text-xs text-white/50 uppercase tracking-wider mb-2">Total Score</p>
+          <div className="flex justify-center gap-4 text-xs">
+            <span className="text-green-400">😊 +{moodBreakdown.happy * 10}</span>
+            <span className="text-yellow-400">😐 +{moodBreakdown.neutral * 5}</span>
+            <span className="text-red-400">😫 {moodBreakdown.tired * -5}</span>
+          </div>
+          <p className="mt-2 text-2xl font-bold">
+            {(moodBreakdown.happy * 10) + (moodBreakdown.neutral * 5) + (moodBreakdown.tired * -5)} pts
+          </p>
+        </div>
+      </div>
     </GlassCard>
   );
 };

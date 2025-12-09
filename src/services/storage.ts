@@ -77,29 +77,23 @@ export const getTimeRemaining = (): { hours: number; minutes: number; seconds: n
   return { hours, minutes, seconds };
 };
 
-// Calculate happiness score from emotions (0-100)
+// Calculate happiness score from emotions using simple point system
+// Happy = 10 points, Neutral = 5 points, Sad/Tired = -5 points
 export const calculateHappinessScore = (emotions: EmotionScores): number => {
-  // Weighted calculation optimized for happy, neutral, and tired detection
-  // Happy contributes most positively, surprised adds some positivity
-  const positive = emotions.happy * 120 + emotions.surprised * 60;
-
-  // Tired emotions: sad, fearful, angry, disgusted all contribute to tiredness
-  // Sad and fearful are stronger indicators of tiredness
-  const negative = (
-    emotions.sad * 80 +
-    emotions.fearful * 70 +
-    emotions.angry * 60 +
-    emotions.disgusted * 60
+  // Get the dominant emotion
+  const emotionEntries = Object.entries(emotions) as [EmotionType, number][];
+  const [dominantEmotion] = emotionEntries.reduce((max, current) =>
+    current[1] > max[1] ? current : max
   );
 
-  // Neutral provides baseline
-  const neutral = emotions.neutral * 50;
-
-  // Calculate score: start at 50 (neutral baseline), add positive, subtract negative
-  const score = Math.round(50 + positive - negative);
-
-  // Clamp between 0-100
-  return Math.max(0, Math.min(100, score));
+  // Assign points based on dominant emotion
+  if (dominantEmotion === 'happy' || dominantEmotion === 'surprised') {
+    return 10; // Happy/Surprised = 10 points
+  } else if (dominantEmotion === 'neutral') {
+    return 5; // Neutral = 5 points
+  } else {
+    return -5; // Sad/Tired (sad, angry, fearful, disgusted) = -5 points
+  }
 };
 
 // Get dominant emotion from scores
